@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import dev.paie.entite.BulletinSalaire;
@@ -33,8 +32,8 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		
 		BigDecimal sal_base = gr.getNbHeuresBase().multiply(gr.getTauxBase());
 		BigDecimal sal_brut = sal_base.add(bulletin.getPrimeExceptionnelle());
-		BigDecimal total_ret_sal = cotis_non_imp.stream().map(c -> c.getTauxSalarial().multiply(sal_brut)).reduce(BigDecimal::add).get();
-		BigDecimal total_cot_pat = cotis_non_imp.stream().map(c -> c.getTauxPatronal().multiply(sal_brut)).reduce(BigDecimal::add).get();
+		BigDecimal total_ret_sal = cotis_non_imp.stream().filter(c -> c.getTauxSalarial() != null).map(c -> c.getTauxSalarial().multiply(sal_brut)).reduce(BigDecimal::add).get();
+		BigDecimal total_cot_pat = cotis_non_imp.stream().filter(c -> c.getTauxPatronal() != null).map(c -> c.getTauxPatronal().multiply(sal_brut)).reduce(BigDecimal::add).get();
 		BigDecimal net_impos = sal_brut.subtract(total_ret_sal);
 		BigDecimal net_a_payer = net_impos.subtract( cotis_imp.stream().map(c -> c.getTauxSalarial().multiply(sal_brut)).reduce(BigDecimal::add).get() );
 		
