@@ -1,5 +1,6 @@
 package dev.paie.entite;
 
+//Pas de mapping
 public class ResultatCalculRemuneration {
 	private String salaireDeBase;
 	private String salaireBrut;

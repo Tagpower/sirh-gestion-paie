@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,19 +28,27 @@ public class Cotisation {
 	private BigDecimal tauxSalarial;
 	@Column(name="tauxPatronal")
 	private BigDecimal tauxPatronal;
+	@ManyToMany(mappedBy="cotis_impo")
+	private ProfilRemuneration profilRemImposable;
+	@ManyToMany(mappedBy="cotis_non_impo")
+	private ProfilRemuneration profilRemNonImposable;
 	
 	public Cotisation() {
 		
 	}
-	
-	public Cotisation(String code, String libelle, BigDecimal tauxSalarial, BigDecimal tauxPatronal) {
+
+	public Cotisation(String code, String libelle, BigDecimal tauxSalarial, BigDecimal tauxPatronal,
+		ProfilRemuneration profilRemImposable, ProfilRemuneration profilRemNonImposable) {
 		this.code = code;
 		this.libelle = libelle;
 		this.tauxSalarial = tauxSalarial;
 		this.tauxPatronal = tauxPatronal;
+		this.profilRemImposable = profilRemImposable;
+		this.profilRemNonImposable = profilRemNonImposable;
 	}
-	
-	
+
+
+
 	public String getCode() {
 		return code;
 	}
@@ -68,6 +80,26 @@ public class Cotisation {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public ProfilRemuneration getProfilRemImposable() {
+		return profilRemImposable;
+	}
+
+	public void setProfilRemImposable(ProfilRemuneration profilRemImposable) {
+		this.profilRemImposable = profilRemImposable;
+	}
+
+	public ProfilRemuneration getProfilRemNonImposable() {
+		return profilRemNonImposable;
+	}
+
+	public void setProfilRemNonImposable(ProfilRemuneration profilRemNonImposable) {
+		this.profilRemNonImposable = profilRemNonImposable;
+	}
+
+
+	
+	
 	
 	
 	

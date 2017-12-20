@@ -2,11 +2,12 @@ package dev.paie.entite;
 
 import java.time.LocalDate;
 
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class Periode {
 	
 	private Integer id;
-	
 	private LocalDate dateDebut;
 	private LocalDate dateFin;
 	
