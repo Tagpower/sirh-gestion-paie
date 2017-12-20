@@ -8,4 +8,5 @@ public interface CotisationService {
 	void sauvegarder(Cotisation nouvelleCotisation);
 	void mettreAJour(Cotisation cotisation);
 	List<Cotisation> lister();
+	void supprimer(Cotisation cotisation);
 }

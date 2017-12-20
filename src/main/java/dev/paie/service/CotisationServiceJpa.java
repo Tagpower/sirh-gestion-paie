@@ -44,5 +44,13 @@ import dev.paie.spring.JpaConfig;
 		TypedQuery<Cotisation> q = em.createQuery("SELECT c FROM Cotisation c", Cotisation.class);
 		return q.getResultList();
 	}
+	
+	public void supprimer(Cotisation cotisation) {
+		Cotisation c = em.find(Cotisation.class, cotisation.getId());
+		if(c != null) {
+			em.remove(c);
+		}
+		
+	}
 
 }

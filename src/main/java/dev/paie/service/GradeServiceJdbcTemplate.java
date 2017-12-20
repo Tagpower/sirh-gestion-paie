@@ -42,6 +42,12 @@ public class GradeServiceJdbcTemplate implements GradeService {
 		return this.jdbcTemplate.query(sql, new GradeMapper());
 	}
 	
+	@Override
+	public void supprimer(Grade grade) {
+		String sql = "DELETE FROM grade WHERE id=?";
+		this.jdbcTemplate.update(sql, grade.getId());
+	}
+	
 	
 }
 
