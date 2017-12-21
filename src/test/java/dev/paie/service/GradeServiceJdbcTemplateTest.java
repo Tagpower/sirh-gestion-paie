@@ -25,15 +25,15 @@ public class GradeServiceJdbcTemplateTest {
 		gradeService.sauvegarder(g1);
 		
 		//vérifier qu'il est possible de récupérer le nouveau grade via la méthode lister
-		assertThat(gradeService.lister().get(gradeService.lister().size()-1).getCode()).isEqualTo("AAAAA");
+		assertThat(gradeService.lister().get(0).getCode()).isEqualTo("AAAAA");
 		
 		//modifier un grade
-		Grade g2 = new Grade("CCCCC", new BigDecimal(318), new BigDecimal(1500));
-		gradeService.mettreAJour(g2);	
+		g1.setCode("CCCCC");
+		gradeService.mettreAJour(g1);	
 		
 		//vérifier que les modifications sont bien prises en compte via la méthode lister
-		assertThat(gradeService.lister().get(gradeService.lister().size()-1).getCode()).isEqualTo("CCCCC");
+		assertThat(gradeService.lister().get(0).getCode()).isEqualTo("CCCCC");
 		
-		gradeService.supprimer(g2);
+		gradeService.supprimer(g1);
 	}
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,9 @@ import dev.paie.repository.RemunerationEmployeRepository;
 @ImportResource({"classpath:jdd-config.xml", "classpath:entreprises.xml", "classpath:grades.xml", "classpath:profils-remuneration.xml"})
 public class InitialiserDonneesServiceImpl implements InitialiserDonneesService{
 
+	@Autowired
+	private ApplicationContext context;
+	
 //	@Autowired
 //	private AvantageRepository avantageRepository;
 	@Autowired

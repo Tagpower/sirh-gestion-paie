@@ -23,19 +23,19 @@ public class AvantageRepositoryTest {
 	@Autowired private AvantageRepository avantageRepository;
 	@Test
 	public void test_sauvegarder_lister_mettre_a_jour() {
-		//TODO sauvegarder un nouvel avantage
+		//sauvegarder un nouvel avantage
 		Avantage av = new Avantage("AV001", "Avantage 1", new BigDecimal(150));
 		avantageRepository.save(av);
 		int testId = av.getId();
 			
-		//TODO vérifier qu'il est possible de récupérer le nouvel avantage via la méthode findOne
+		//vérifier qu'il est possible de récupérer le nouvel avantage via la méthode findOne
 		assertThat(avantageRepository.findOne(testId).getNom()).isEqualTo("Avantage 1");
 		
-		//TODO modifier un avantage
+		//modifier un avantage
 		av.setCode("AV101");
 		avantageRepository.save(av);
 			
-		//TODO vérifier que les modifications sont bien prises en compte via la méthode findOne
+		//vérifier que les modifications sont bien prises en compte via la méthode findOne
 		assertThat(avantageRepository.findOne(testId).getCode()).isEqualTo("AV101");
 		
 		avantageRepository.delete(testId);
