@@ -21,14 +21,14 @@ public class GradeServiceJdbcTemplateTest {
 	@Test
 	public void test_sauvegarder_lister_mettre_a_jour() {
 		//sauvegarder un nouveau grade
-		Grade g1 = new Grade(100, "AAAAA", new BigDecimal(500), new BigDecimal(1300));
+		Grade g1 = new Grade("AAAAA", new BigDecimal(500), new BigDecimal(1300));
 		gradeService.sauvegarder(g1);
 		
 		//vérifier qu'il est possible de récupérer le nouveau grade via la méthode lister
 		assertThat(gradeService.lister().get(gradeService.lister().size()-1).getCode()).isEqualTo("AAAAA");
 		
 		//modifier un grade
-		Grade g2 = new Grade(100, "CCCCC", new BigDecimal(318), new BigDecimal(1500));
+		Grade g2 = new Grade("CCCCC", new BigDecimal(318), new BigDecimal(1500));
 		gradeService.mettreAJour(g2);	
 		
 		//vérifier que les modifications sont bien prises en compte via la méthode lister

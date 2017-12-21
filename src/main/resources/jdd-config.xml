@@ -47,12 +47,13 @@
         </property>
     </bean>
 
-    <bean id="grade1" class="dev.paie.entite.Grade">
+    <bean id="grade4" class="dev.paie.entite.Grade">
+        <property name="code" value="GRADE_D" />
         <property name="nbHeuresBase" value="151.67" />
         <property name="tauxBase" value="11.0984" />
     </bean>
 
-    <bean id="entreprise1" class="dev.paie.entite.Entreprise">
+    <bean id="entreprise4" class="dev.paie.entite.Entreprise">
         <property name="siret" value="80966785000022" />
         <property name="denomination" value="Dev Entreprise" />
         <property name="codeNaf" value="6202A" />

@@ -29,7 +29,4 @@
 	</logger>
 
 <!-- règle de logs par défaut. Ici : niveau DEBUG vers la sortie standard -->
-	<root level="DEBUG">
-		<appender-ref ref="STDOUT1" />
-	</root>
 </configuration>

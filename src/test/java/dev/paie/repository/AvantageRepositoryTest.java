@@ -52,6 +52,6 @@ public class AvantageRepositoryTest {
 		
 		assertThat(avTrouve.getNom()).isEqualTo("Code à trouver");
 		
-		//avantageRepository.delete(av);
+		avantageRepository.delete(av);
 	}
 }

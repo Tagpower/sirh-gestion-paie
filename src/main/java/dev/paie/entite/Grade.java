@@ -25,19 +25,15 @@ public class Grade {
 	private BigDecimal nbHeuresBase;
 	@Column(name="tauxBase")
 	private BigDecimal tauxBase;
-	@ManyToOne
-	//@JoinColumn(mappedBy="grade") TODO
-	private RemunerationEmploye rem;
 	
 	public Grade() {
 		
 	}
 	
-	public Grade(String code, BigDecimal nbHeuresBase, BigDecimal tauxBase, RemunerationEmploye rem) {
+	public Grade(String code, BigDecimal nbHeuresBase, BigDecimal tauxBase) {
 		this.code = code;
 		this.nbHeuresBase = nbHeuresBase;
 		this.tauxBase = tauxBase;
-		this.rem = rem;
 	}
 	
 	public String getCode() {
@@ -65,13 +61,6 @@ public class Grade {
 		this.id = id;
 	}
 
-	public RemunerationEmploye getRem() {
-		return rem;
-	}
-
-	public void setRem(RemunerationEmploye rem) {
-		this.rem = rem;
-	}
 	
 	
 	
