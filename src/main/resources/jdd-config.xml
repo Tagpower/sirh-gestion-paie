@@ -21,6 +21,7 @@
     </bean>
 
     <bean id="profilRemuneration1" class="dev.paie.entite.ProfilRemuneration">
+    	<property name="code" value="Profil 1" />
         <property name="cotisationsNonImposables">
             <util:list value-type="dev.paie.entite.Cotisation">
                <ref bean="ep01" />

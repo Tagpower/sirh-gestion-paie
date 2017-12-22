@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.paie.entite.Entreprise;
@@ -32,9 +33,14 @@ public class RemunerationEmployeController {
 	private RemunerationEmployeRepository remunerationEmployeRepository;
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
-	public ModelAndView creerEmploye() {
+	public ModelAndView creerForm() {
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("employes/creerEmploye");
+		
+		String matricule = null;
+		
+		mv.addObject("matricule", matricule);
 
 		List<Entreprise> entreprises = entrepriseRepository.findAll();
 		mv.addObject("entreprises", entreprises);
@@ -48,12 +54,34 @@ public class RemunerationEmployeController {
 		RemunerationEmploye remEmploye = new RemunerationEmploye();
 		mv.addObject("employe", remEmploye);
 		
+		
+		
 		return mv;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public void submitForm(@ModelAttribute("employe") RemunerationEmploye employe) {
+	@RequestMapping(method = RequestMethod.POST, path = "/creer")
+	public ModelAndView submitForm( @ModelAttribute("employe") RemunerationEmploye employe, @RequestParam("matricule") String matricule) {
+		employe.setMatricule(matricule);
 		remunerationEmployeRepository.save(employe);
+		
+		
+		
+		return listerEmployes();
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	public ModelAndView listerEmployes() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("employes/listerEmployes");
+		
+		List<RemunerationEmploye> employes = remunerationEmployeRepository.findAll();
+		mv.addObject("employes", employes);
+		
+		
+		
+		return mv;
 	}
 	
 	
