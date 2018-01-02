@@ -18,6 +18,12 @@
 
 	<div class="container" style="margin:1em">
 	
+		<nav class="navbar navbar-light bg-faded">
+		  <span class="navbar-text">
+		    <a href='<c:url value="lister"/>'>Employés</a>  <a href='<c:url value="../bulletins/lister"/>'>Bulletins</a>
+		  </span>
+		</nav>
+		
 		<h1 style="text-align:center">Liste des employés</h1>
 		
  <input type="button" class="btn btn-primary" value="Ajouter un employé" onclick="location.href = '<c:url value="creer" />';">

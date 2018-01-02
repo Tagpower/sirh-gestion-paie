@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.paie.entite.Avantage;
 import dev.paie.entite.BulletinSalaire;
 import dev.paie.entite.Cotisation;
 import dev.paie.entite.Entreprise;
@@ -17,7 +17,8 @@ import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
 import dev.paie.entite.RemunerationEmploye;
-import dev.paie.repository.AvantageRepository;
+import dev.paie.entite.Utilisateur;
+import dev.paie.entite.Utilisateur.Role;
 import dev.paie.repository.BulletinRepository;
 import dev.paie.repository.CotisationRepository;
 import dev.paie.repository.EntrepriseRepository;
@@ -25,6 +26,7 @@ import dev.paie.repository.GradeRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilRemunerationRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
+import dev.paie.repository.UtilisateurRepository;
 
 @Service
 @ImportResource({"classpath:jdd-config.xml", "classpath:entreprises.xml", "classpath:grades.xml", "classpath:profils-remuneration.xml"})
@@ -32,6 +34,9 @@ public class InitialiserDonneesServiceImpl implements InitialiserDonneesService{
 
 	@Autowired
 	private ApplicationContext context;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 //	@Autowired
 //	private AvantageRepository avantageRepository;
@@ -49,6 +54,8 @@ public class InitialiserDonneesServiceImpl implements InitialiserDonneesService{
 	private RemunerationEmployeRepository remRepository;
 	@Autowired
 	private BulletinRepository bulletinRepository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
 	
 
 //	@Autowired
@@ -85,6 +92,15 @@ public class InitialiserDonneesServiceImpl implements InitialiserDonneesService{
 			p.setDateFin(dateFin);
 			periodeRepository.save(p);
 		}
+		
+		String motDePasse = "mdp";
+		String motDePasseHash = this.passwordEncoder.encode(motDePasse);
+		
+		Utilisateur u_admin = new Utilisateur("bill", this.passwordEncoder.encode("billy"), true, Role.ROLE_ADMINISTRATEUR);
+		utilisateurRepository.save(u_admin);
+		Utilisateur u_user = new Utilisateur("bob", this.passwordEncoder.encode("bobby"), true, Role.ROLE_UTILISATEUR);
+		utilisateurRepository.save(u_user);
+		
 		
 	}
 
